@@ -1,9 +1,9 @@
 %% square wave generator
-clc
-clear all
-hold off
+clc;
+clear all;
+hold off;
 
-f0=159;     %fundamental freq of input square wave
+f0 = 4000;     %fundamental freq of input square wave
 T0 = 1/f0;  %period 
 tstep = 0.005*T0;
 no_sample = 3*T0/tstep + 1; %no. of samples  within  3*T0
@@ -70,9 +70,9 @@ pause
 
 %% Designing the 2nd order Butterworth filter
 
-R=10e3;
+R= 2e3;
 C=0.1e-6;
-fc=1/(2*pi*R*C)     %cutoff freq of filter
+fc = 1/(2*pi*R*C);    %cutoff freq of filter
 % fc = 1 / (2 * pi * sqrt(R * R * C * C)) %cutoff freq of filter
 %fc = 5000;
 Q = 5; % Quality factor for Butterworth filter

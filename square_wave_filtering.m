@@ -3,7 +3,7 @@ clc
 clear all
 hold off
 
-f0=4000;     %fundamental freq of input square wave
+f0=16000;     %fundamental freq of input square wave
 T0 = 1/f0;  %period 
 tstep = 0.005*T0;
 no_sample = 3*T0/tstep + 1; %no. of samples  within  3*T0
