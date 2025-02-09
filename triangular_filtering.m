@@ -3,11 +3,11 @@ clc
 clear all
 hold off
 
-f0=500;     %fundamental freq of input triangular wave
-T0 = 1/f0;  %period 
+f0=500;    
+T0 = 1/f0; 
 tstep = 0.005*T0;
-no_sample = 3*T0/tstep + 1; %no. of samples  within  3*T0
-no_sample1 = T0/tstep + 1; %no. of samples  within  T0
+no_sample = 3*T0/tstep + 1; 
+no_sample1 = T0/tstep + 1; 
 %tt = -0.5*T0:tstep:0.5*T0;
 tt = -1.5*T0:tstep:1.5*T0;
 
@@ -15,6 +15,8 @@ tt1 = -0.5*T0:tstep:0.5*T0; % time vector for the period -0.5T0 to 0.5T0
 gp1 = tt1/T0; %input - triangular wave in the period -0.5T0 to 0.5T0
 gp_in = [gp1 gp1(2:no_sample1-1) gp1]; %3 cycles of the triangular wave
 figure(1)
+
+
 Hp1 = plot(tt,gp_in);
 set(Hp1,'LineWidth',2)
 Ha = gca;
@@ -81,20 +83,7 @@ set(Ha,'Fontsize',16)
 legend('input','output')
 pause
 
-% hold off
-% Hp1=plot(f,angle(c_out))
-% set(Hp1,'LineWidth',2)
-% Ha = gca;
-% set(Ha,'Fontsize',16)
-% title('phase spectrum of output')
-% axis([-0.1e4 0.1e4 -pi pi])
-% pause
-% hold on
-% Hp1=plot(f,angle(c_in),'r')
-% set(Hp1,'LineWidth',2)
-% Ha = gca;
-% set(Ha,'Fontsize',16)
-% pause
+
 % hold off
 
 %% Construct the output signal from the Cout Fourier coefficients
