@@ -1,4 +1,3 @@
-%% square wave generator
 clc;
 clear all;
 hold off;
@@ -8,15 +7,11 @@ T0 = 1/f0;  %period
 tstep = 0.005*T0;
 no_sample = 3*T0/tstep + 1; %no. of samples  within  3*T0
 no_sample1 = T0/tstep + 1; %no. of samples  within  T0
-%tt = -0.5*T0:tstep:0.5*T0;
+
 tt = -1.5*T0:tstep:1.5*T0;
 
-% tt1 = -0.5*T0:tstep:0.5*T0; % time vector for the period -0.5T0 to 0.5T0
-% gp1 = tt1/T0; %input - triangular wave in the period -0.5T0 to 0.5T0
-% gp_in = [gp1 gp1(2:no_sample1-1) gp1]; %3 cycles of the triangular wave
-
-amplitude = 5; % half of V peak to peak
-gp1 = amplitude * square(2 * pi * f0 * tt); % Generate square wave
+amplitude = 5; 
+gp1 = amplitude * square(2 * pi * f0 * tt); 
 gp_in = gp1; % Input Waveform
 
 figure(1)
@@ -25,7 +20,7 @@ set(Hp1,'LineWidth',2)
 Ha = gca;
 set(Ha,'Fontsize',16)
 title('input - time domain')
-pause
+
 
 %% Fourier series representation of signal (Amplitude Spectrum)
       
@@ -35,17 +30,12 @@ nvec = -N:N;
 c_in = zeros(size(nvec));
 for n = nvec
     m = n+N+1;
-    % c_in(m) = 1i*K*((-1)^n)/n;
     
     if mod(n, 2) == 1
         c_in(m) = amplitude * (2 / (1i * pi * n)); % Fourier coefficients for square wave
     else
         c_in(m) = 0; % Zero coefficients for even harmonics
     end
-
-    % if (n == 0)
-    %   c_in(m) = 0.0;
-    % end
 end
 f = nvec*f0; %frequency vector
 figure(2)
@@ -55,7 +45,7 @@ set(Hp1,'LineWidth',2)
 Ha = gca;
 set(Ha,'Fontsize',16)
 title('magnitude spectrum of input')
-pause
+
 
 %% Fourier series representation of signal (Phase Spectrum)
 
@@ -66,21 +56,17 @@ Ha = gca;
 set(Ha,'Fontsize',16)
 axis([-0.1e4 0.1e4 -pi pi])
 title('phase spectrum of input')
-pause
 
 %% Designing the 2nd order Butterworth filter
 
 R= 2e3;
 C=0.1e-6;
 fc = 1/(2*pi*R*C);    %cutoff freq of filter
-% fc = 1 / (2 * pi * sqrt(R * R * C * C)) %cutoff freq of filter
-%fc = 5000;
+
 Q = 5; % Quality factor for Butterworth filter
 f_gain = 3 - (1 / Q); % Filter Gain
 
-%Hf = 1 ./(1+1i*f/fc) ;%filter transfer function
 
-% 2nd order filter transfer function
 Hf = 1 ./ (1 - (f / fc).^2 + 1i * (f / (fc * Q)));
 c_out = c_in .* Hf; %Fourier coefficients of the filter output
 
@@ -96,7 +82,7 @@ title('magnitude spectrum of filter output and input')
 Ha = gca;
 set(Ha,'Fontsize',16)
 legend('input','output')
-pause
+
 
 
 %% Construct the output signal from the Cout Fourier coefficients
